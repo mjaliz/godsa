@@ -2,17 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/mjaliz/godsa/array"
+	"github.com/mjaliz/godsa/exercises"
 )
 
 func main() {
-	arr := array.NewArray()
-	fmt.Println(arr)
-	arr.Push("Ryan")
-	arr.Push("Hana")
-	arr.Push("Kian")
-	arr.Push("Kaveh")
-	arr.Delete(2)
-	fmt.Println(arr)
-	fmt.Println(arr.Get(0))
+	sa := exercises.MergeSortedArrays([]int{12, 14, 25}, []int{10, 20, 32, 40})
+	fmt.Println(sa)
 }
