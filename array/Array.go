@@ -27,3 +27,13 @@ func (a *Array) Pop() string {
 	a.length--
 	return item
 }
+
+func (a *Array) Delete(index int) string {
+	item := a.data[index]
+	for i := index; i < a.length-1; i++ {
+		a.data[i] = a.data[i+1]
+	}
+	delete(a.data, a.length-1)
+	a.length--
+	return item
+}
