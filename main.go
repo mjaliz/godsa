@@ -1,4 +1,17 @@
-package linklist
+package main
+
+import "fmt"
+
+func main() {
+	l := NewLinkList(2)
+	l.Append(3)
+	// l.Append(4)
+	fmt.Println(l)
+	tmp := l.Pop()
+	l.Pop()
+	tmp = l.Pop()
+	fmt.Println(tmp)
+}
 
 type Node struct {
 	Val  int
@@ -39,23 +52,21 @@ func (l *LinkList) Append(val int) bool {
 }
 
 func (l *LinkList) Pop() *Node {
-	if l.Head == nil {
+	if l.Length == 0 {
 		return nil
 	}
-	if l.Head == l.Tail {
-		tmp := l.Head
-		l.Tail = nil
+	temp := l.Head
+	pre := l.Head
+	for temp.Next != nil {
+		pre = temp
+		temp = temp.Next
+	}
+	l.Tail = pre
+	l.Tail.Next = nil
+	l.Length--
+	if l.Length == 0 {
 		l.Head = nil
-		return tmp
+		l.Tail = nil
 	}
-	tmp := l.Head
-	prev := l.Head
-	for tmp.Next != nil {
-		if tmp.Next.Next != nil {
-			prev = prev.Next
-		}
-		tmp = tmp.Next
-	}
-	l.Tail = prev
-	return tmp
+	return temp
 }
