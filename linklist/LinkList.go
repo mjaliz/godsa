@@ -39,23 +39,33 @@ func (l *LinkList) Append(val int) bool {
 }
 
 func (l *LinkList) Pop() *Node {
-	if l.Head == nil {
+	if l.Length == 0 {
 		return nil
 	}
-	if l.Head == l.Tail {
-		tmp := l.Head
-		l.Tail = nil
+	temp := l.Head
+	pre := l.Head
+	for temp.Next != nil {
+		pre = temp
+		temp = temp.Next
+	}
+	l.Tail = pre
+	l.Tail.Next = nil
+	l.Length--
+	if l.Length == 0 {
 		l.Head = nil
-		return tmp
+		l.Tail = nil
 	}
-	tmp := l.Head
-	prev := l.Head
-	for tmp.Next != nil {
-		if tmp.Next.Next != nil {
-			prev = prev.Next
-		}
-		tmp = tmp.Next
+	return temp
+}
+
+func (l *LinkList) Prepend(val int) {
+	newNode := NewNode(val)
+	if l.Length == 0 {
+		l.Head = newNode
+		l.Tail = newNode
+	} else {
+		newNode.Next = l.Head
+		l.Head = newNode
 	}
-	l.Tail = prev
-	return tmp
+	l.Length++
 }
