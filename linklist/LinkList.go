@@ -69,3 +69,17 @@ func (l *LinkList) Prepend(val int) {
 	}
 	l.Length++
 }
+
+func (l *LinkList) PopFirst() *Node {
+	if l.Length == 0 {
+		return nil
+	}
+	temp := l.Head
+	l.Head = l.Head.Next
+	temp.Next = nil
+	l.Length--
+	if l.Length == 0 {
+		l.Tail = nil
+	}
+	return temp
+}
