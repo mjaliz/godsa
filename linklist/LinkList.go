@@ -94,3 +94,12 @@ func (l *LinkList) Get(index int) *Node {
 	}
 	return temp
 }
+
+func (l *LinkList) Set(index, val int) bool {
+	temp := l.Get(index)
+	if temp != nil {
+		temp.Val = val
+		return true
+	}
+	return false
+}
