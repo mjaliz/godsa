@@ -83,3 +83,14 @@ func (l *LinkList) PopFirst() *Node {
 	}
 	return temp
 }
+
+func (l *LinkList) Get(index int) *Node {
+	if index < 0 || index >= l.Length {
+		return nil
+	}
+	temp := l.Head
+	for i := 0; i < index; i++ {
+		temp = temp.Next
+	}
+	return temp
+}
