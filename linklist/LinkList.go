@@ -58,7 +58,7 @@ func (l *LinkList) Pop() *Node {
 	return temp
 }
 
-func (l *LinkList) Prepend(val int) {
+func (l *LinkList) Prepend(val int) bool {
 	newNode := NewNode(val)
 	if l.Length == 0 {
 		l.Head = newNode
@@ -68,6 +68,7 @@ func (l *LinkList) Prepend(val int) {
 		l.Head = newNode
 	}
 	l.Length++
+	return true
 }
 
 func (l *LinkList) PopFirst() *Node {
@@ -102,4 +103,22 @@ func (l *LinkList) Set(index, val int) bool {
 		return true
 	}
 	return false
+}
+
+func (l *LinkList) Insert(index, val int) bool {
+	if index < 0 || index > l.Length {
+		return false
+	}
+	if index == 0 {
+		return l.Prepend(val)
+	}
+	if index == l.Length {
+		return l.Append(val)
+	}
+	newNode := NewNode(val)
+	temp := l.Get(index - 1)
+	newNode.Next = temp.Next
+	temp.Next = newNode
+	l.Length++
+	return true
 }
