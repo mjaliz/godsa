@@ -122,3 +122,21 @@ func (l *LinkList) Insert(index, val int) bool {
 	l.Length++
 	return true
 }
+
+func (l *LinkList) Remove(index int) *Node {
+	if index < 0 || index >= l.Length {
+		return nil
+	}
+	if index == 0 {
+		return l.PopFirst()
+	}
+	if index == l.Length-1 {
+		return l.Pop()
+	}
+	prev := l.Get(index - 1)
+	temp := prev.Next
+	prev.Next = temp.Next
+	temp.Next = nil
+	l.Length--
+	return temp
+}
